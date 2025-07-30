@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-header bg-white text-center">
+                    <h4 class="mb-0">Create a New Post</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Post Content -->
+                        <div class="mb-3">
+                            <label for="id_content" class="form-label">What's on your mind?</label>
+                            {{ form.content }}
+                        </div>
+
+                        <!-- Post Image -->
+                        <div class="mb-3">
+                            <label for="id_image" class="form-label">Upload Image (Optional)</label>
+                            {{ form.image }}
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Small CSS tweak for textarea and file input -->
+<style>
+    textarea.form-control {
+        min-height: 120px;
+    }
+    input[type="file"].form-control {
+        padding: 5px;
+    }
+</style>
+{% endblock %}

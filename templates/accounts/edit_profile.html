@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Profile</h2>
+
+    <div class="row">
+        <!-- Profile Picture Preview -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body text-center">
+                    {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" 
+                             class="img-fluid rounded-circle mb-3"
+                             style="width:150px;height:150px;object-fit:cover;">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.jpg' %}" 
+                             class="img-fluid rounded-circle mb-3"
+                             style="width:150px;height:150px;object-fit:cover;">
+                    {% endif %}
+                    <p><strong>{{ user.username }}</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Form -->
+        <div class="col-md-8">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'profile' user.username %}" class="btn btn-secondary">Cancel</a>
+            </form>
+
+            <hr>
+            <!-- Account Deletion -->
+            <form method="post" action="{% url 'delete_account' %}" 
+                  onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-2">Delete My Account</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

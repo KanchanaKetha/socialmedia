@@ -1,0 +1,108 @@
+/* === Global Styles === */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* === Navbar === */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.navbar .rounded-circle {
+    border: 2px solid #fff;
+}
+
+/* === Cards (Posts & Comments) === */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.card-body p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.card img {
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+/* === Buttons === */
+.btn-outline-primary:hover,
+.btn-primary {
+    background-color: #1877f2;
+    border-color: #1877f2;
+    color: #fff;
+}
+
+.btn-outline-danger:hover,
+.btn-danger {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    color: #fff;
+}
+
+/* === Comments Section === */
+.comment-card {
+    border-left: 3px solid #1877f2;
+    padding-left: 10px;
+}
+
+.card-footer {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+/* === Profile Page === */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-header img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.profile-header h2 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.profile-header p {
+    margin: 0;
+    color: #666;
+}
+
+/* === Flash Messages === */
+.alert {
+    border-radius: 8px;
+}
