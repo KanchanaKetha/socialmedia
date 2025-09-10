@@ -8,6 +8,7 @@ from .models import Profile
 from .forms import ProfileForm
 from posts.models import Post  # To show user's posts in profile
 
+
 # Register new user
 def register(request):
     if request.method == 'POST':
@@ -51,16 +52,13 @@ def edit_profile(request, username):
     return render(request, 'accounts/edit_profile.html', {'form': form})
 
 
-# Account Delete
+# ✅ Account Delete (fixed: no username in URL needed)
 @login_required
-def delete_account(request, username):
-    if request.user.username != username:
-        return redirect('profile', username=request.user.username)
-
+def delete_account(request):
     if request.method == 'POST':
         user = request.user
         logout(request)
         user.delete()
-        return redirect('register')
+        messages.success(request, "Your account has been deleted successfully.")
+        return redirect('register')  # redirect to register/login page
     return redirect('profile', username=request.user.username)
-

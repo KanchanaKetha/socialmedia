@@ -15,8 +15,18 @@
         <div>
             <h2 class="mb-0">{{ profile.user.username }}</h2>
             <p class="text-muted mb-0">{{ profile.bio|default:"No bio yet." }}</p>
+
             {% if request.user == profile.user %}
-                <a href="{% url 'edit_profile' profile.user.username %}" class="btn btn-sm btn-primary mt-2">Edit Profile</a>
+                <a href="{% url 'edit_profile' profile.user.username %}" 
+                   class="btn btn-sm btn-primary mt-2">Edit Profile</a>
+
+                <!-- ✅ Delete Account (POST form, no 405 error) -->
+                <form method="post" action="{% url 'delete_account' profile.user.username %}" 
+                      class="d-inline"
+                      onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger mt-2">Delete Account</button>
+                </form>
             {% endif %}
         </div>
     </div>
@@ -29,7 +39,8 @@
             <div class="card-body">
                 <p>{{ post.content }}</p>
                 {% if post.image %}
-                    <img src="{{ post.image.url }}" class="img-fluid rounded mb-2" style="max-height: 400px; object-fit: cover;">
+                    <img src="{{ post.image.url }}" class="img-fluid rounded mb-2" 
+                         style="max-height: 400px; object-fit: cover;">
                 {% endif %}
                 <small class="text-muted">{{ post.created_at }}</small>
             </div>
