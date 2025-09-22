@@ -35,7 +35,7 @@
 
             <hr>
             <!-- Account Deletion -->
-            <form method="post" action="{% url 'delete_account' %}" 
+            <form method="post" action="{% url 'delete_account' user.username %}" 
                   onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger mt-2">Delete My Account</button>

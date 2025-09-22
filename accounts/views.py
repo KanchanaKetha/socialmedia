@@ -4,6 +4,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from django.contrib.auth.models import User
+
 from .models import Profile
 from .forms import ProfileForm
 from posts.models import Post  # To show user's posts in profile
@@ -28,8 +30,9 @@ def profile_view(request, username):
     profile_user = get_object_or_404(Profile, user__username=username)
     posts = Post.objects.filter(user=profile_user.user).order_by('-created_at')
     return render(request, 'accounts/profile.html', {
-        'profile_user': profile_user.user,
+        #'profile_user': profile_user.user,
         'profile': profile_user,
+        #'profile':profile,
         'posts': posts
     })
 
@@ -38,6 +41,7 @@ def profile_view(request, username):
 @login_required
 def edit_profile(request, username):
     if request.user.username != username:
+        messages.error(request, "You can only edit your own profile.")
         return redirect('profile', username=request.user.username)
 
     profile = request.user.profile
@@ -55,6 +59,8 @@ def edit_profile(request, username):
 # ✅ Account Delete (fixed: no username in URL needed)
 @login_required
 def delete_account(request):
+    if request.user.username != username:
+        return redirect('profile', username=request.user.username)
     if request.method == 'POST':
         user = request.user
         logout(request)
